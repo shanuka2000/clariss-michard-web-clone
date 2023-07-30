@@ -1,7 +1,9 @@
-import "./App.css";
+import styled from "styled-components";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return <Container>Hello World</Container>;
 }
 
 export default App;
+
+const Container = styled.div``;
