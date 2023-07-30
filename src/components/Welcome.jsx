@@ -1,13 +1,17 @@
 import styled, { keyframes } from "styled-components";
 
-function Welcome() {
+function Welcome({ onClick }) {
+  const changeView = () => {
+    onClick();
+  };
+
   return (
     <Container>
       <WelcomeImage
         src={"https://clarissemichard.com/welcomeAnim.cb031a15.gif"}
       />
       <InfoText>This website uses cookies to give you the best.</InfoText>
-      <EnterButton>Enter</EnterButton>
+      <EnterButton onClick={changeView}>Enter</EnterButton>
     </Container>
   );
 }
