@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Welcome from "./components/Welcome";
 import { useEffect, useState } from "react";
+import Content from "./components/Content";
 
 function App() {
   const [viewChange, setViewChnage] = useState(false);
@@ -15,11 +16,15 @@ function App() {
 
   return (
     <Container>
-      <Welcome
-        onClick={() => {
-          handleViewChange();
-        }}
-      />
+      {!viewChange ? (
+        <Welcome
+          onClick={() => {
+            handleViewChange();
+          }}
+        />
+      ) : (
+        <Content />
+      )}
     </Container>
   );
 }

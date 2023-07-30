@@ -1,17 +1,31 @@
-import styled, { keyframes } from "styled-components";
+import { useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 
 function Welcome({ onClick }) {
+  const [fadeout, setFadeout] = useState(false);
+
   const changeView = () => {
-    onClick();
+    setFadeout(true);
+
+    const timeout = setTimeout(() => {
+      onClick();
+    }, 1100);
+
+    return () => clearTimeout(timeout);
   };
 
   return (
-    <Container>
+    <Container fade={fadeout.toString()}>
       <WelcomeImage
+        fade={fadeout.toString()}
         src={"https://clarissemichard.com/welcomeAnim.cb031a15.gif"}
       />
-      <InfoText>This website uses cookies to give you the best.</InfoText>
-      <EnterButton onClick={changeView}>Enter</EnterButton>
+      <InfoText fade={fadeout.toString()}>
+        This website uses cookies to give you the best.
+      </InfoText>
+      <EnterButton fade={fadeout.toString()} onClick={changeView}>
+        Enter
+      </EnterButton>
     </Container>
   );
 }
@@ -111,6 +125,19 @@ const colorChange = keyframes`
     }
 `;
 
+const fadeOutAnimation = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+const fadeOutStyles = css`
+  animation: ${fadeOutAnimation} 1s forwards;
+`;
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -125,6 +152,7 @@ const Container = styled.div`
 const WelcomeImage = styled.img`
   width: 300px;
   height: auto;
+  ${({ fade }) => (fade === "true" ? fadeOutStyles : "")};
 `;
 
 const InfoText = styled.p`
@@ -132,6 +160,7 @@ const InfoText = styled.p`
   margin: 10px;
   font-size: 12px;
   text-transform: uppercase;
+  ${({ fade }) => (fade === "true" ? fadeOutStyles : "")};
 `;
 
 const EnterButton = styled.button`
@@ -145,6 +174,7 @@ const EnterButton = styled.button`
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
+  ${({ fade }) => (fade === "true" ? fadeOutStyles : "")};
 
   &:hover {
     background-color: black;
