@@ -9,3 +9,9 @@
   font-family: "Messapia-Bold";
   src: url("./fonts/Messapia-Bold.otf") format("truetype");
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", sans-serif;
+}
