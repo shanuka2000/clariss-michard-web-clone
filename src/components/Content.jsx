@@ -6,27 +6,87 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Content() {
+  const colors = [
+    { background: "#E8E4E0", other: "#000000" }, // default
+    { background: "rgb(45, 45, 45)", other: "rgb(214, 255, 0)" }, // 1st click
+    { background: "rgb(186, 85, 74)", other: "rgb(255, 224, 133)" }, // 2nd click
+    { background: "rgb(253, 207, 182)", other: "rgb(229, 58, 58)" }, // 3rd click
+    { background: "rgb(31, 98, 70)", other: "rgb(255, 188, 210)" }, // 4th click
+    { background: "rgb(32, 32, 32)", other: "rgb(255, 255, 255)" },
+    { background: "rgb(66, 80, 62)", other: "rgb(255, 212, 175)" },
+    { background: "rgb(134, 140, 125)", other: "rgb(241, 250, 228)" },
+    { background: "rgb(207, 238, 228)", other: "rgb(229, 58, 58)" },
+    { background: "rgb(71, 66, 49)", other: "rgb(239, 234, 53)" },
+    { background: "rgb(153, 163, 191)", other: "rgb(235, 240, 255)" },
+    { background: "rgb(255, 206, 176)", other: "rgb(53, 82, 242)" },
+    { background: "rgb(54, 104, 174)", other: "rgb(255, 203, 219)" },
+  ];
+
   const [lang, setLang] = useState("FR");
+  const [index, setIndex] = useState(0);
+  const [backgroundColor, setBackgroundColor] = useState(
+    colors[index].background
+  );
+  const [otherColor, setOtherColor] = useState(colors[index].other);
+
+  useEffect(() => {
+    console.log("Clicked index " + index);
+  }, [index]);
+
+  const changeColor = () => {
+    const totalLength = colors.length;
+
+    if (index >= totalLength - 1) {
+      console.log("Running if ");
+      setIndex(0);
+      setBackgroundColor(colors[0].background);
+      setOtherColor(colors[0].other);
+      return;
+    }
+
+    setIndex(index + 1);
+    setBackgroundColor(colors[index + 1].background);
+    setOtherColor(colors[index + 1].other);
+  };
 
   return (
-    <Container>
+    <Container background={backgroundColor} other={otherColor}>
       <NavSection>
-        <RotatingImage src={"../src/assets/Mediamodifier-Design.svg"} />
+        <RotatingImage
+          style={{ stroke: "red" }}
+          src={"../src/assets/Mediamodifier-Design.svg"}
+        />
         <TitleTextWrapper>
-          <TItleCharacter>H</TItleCharacter>
-          <TItleCharacter>E</TItleCharacter>
-          <TItleCharacter>L</TItleCharacter>
-          <TItleCharacter>L</TItleCharacter>
-          <TItleCharacter>O</TItleCharacter>
+          <TItleCharacter background={backgroundColor} other={otherColor}>
+            H
+          </TItleCharacter>
+          <TItleCharacter background={backgroundColor} other={otherColor}>
+            E
+          </TItleCharacter>
+          <TItleCharacter background={backgroundColor} other={otherColor}>
+            L
+          </TItleCharacter>
+          <TItleCharacter background={backgroundColor} other={otherColor}>
+            L
+          </TItleCharacter>
+          <TItleCharacter background={backgroundColor} other={otherColor}>
+            O
+          </TItleCharacter>
         </TitleTextWrapper>
-        <ColorChangeButton>Click</ColorChangeButton>
+        <ColorChangeButton
+          background={backgroundColor}
+          other={otherColor}
+          onClick={changeColor}
+        >
+          Click
+        </ColorChangeButton>
       </NavSection>
       <ContentSection>
         <ParagraphWrapper>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             I{"`"}m Clarisse,{" "}
             <WordSet>
               Graduated <School />
@@ -34,23 +94,23 @@ function Content() {
             as a graphic designer specializing in the
             <CustomBold ml="left">web</CustomBold>.
           </ParaLine>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             I work as a <Flower /> freelance webdesigner and graphist. I have a
             weakness for <Language /> digital,
           </ParaLine>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             Especially for designing custom websites with a{" "}
             <CustomBold>Strong</CustomBold> user experiance. I also work on
           </ParaLine>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             Branding projects <Visibility /> where I like to build a strong
             visual identity with all print and
           </ParaLine>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             digital communication. During free time, I <Favorite /> to create cd
             covers.
           </ParaLine>
-          <ParaLine>
+          <ParaLine background={backgroundColor} other={otherColor}>
             <ArrowForward run="true" />I{" "}
             <WordSet>
               would <FavoriteBorder />
@@ -60,19 +120,49 @@ function Content() {
         </ParagraphWrapper>
       </ContentSection>
       <FooterSection>
-        <ContactWrapper>
+        <ContactWrapper background={backgroundColor} other={otherColor}>
           <ArrowForward run="false" />
           <ContactText>Contact</ContactText>
         </ContactWrapper>
-        <LanguageChangeButton>
+        <LanguageChangeButton background={backgroundColor} other={otherColor}>
           <LanguageChangeButtonText>{lang}</LanguageChangeButtonText>
         </LanguageChangeButton>
         <QuickLinks>
-          <CustomQuickLink href="#">Insta</CustomQuickLink>
-          <CustomQuickLink href="#">Dribbble</CustomQuickLink>
-          <CustomQuickLink href="#">Linkedin</CustomQuickLink>
-          <CustomQuickLink href="#">Behance</CustomQuickLink>
-          <CustomQuickLink href="#">Okey studio</CustomQuickLink>
+          <CustomQuickLink
+            background={backgroundColor}
+            other={otherColor}
+            href="#"
+          >
+            Insta
+          </CustomQuickLink>
+          <CustomQuickLink
+            background={backgroundColor}
+            other={otherColor}
+            href="#"
+          >
+            Dribbble
+          </CustomQuickLink>
+          <CustomQuickLink
+            background={backgroundColor}
+            other={otherColor}
+            href="#"
+          >
+            Linkedin
+          </CustomQuickLink>
+          <CustomQuickLink
+            background={backgroundColor}
+            other={otherColor}
+            href="#"
+          >
+            Behance
+          </CustomQuickLink>
+          <CustomQuickLink
+            background={backgroundColor}
+            other={otherColor}
+            href="#"
+          >
+            Okey studio
+          </CustomQuickLink>
         </QuickLinks>
       </FooterSection>
     </Container>
@@ -192,6 +282,8 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  background-color: ${(props) => props.background};
 `;
 
 const NavSection = styled.div`
@@ -213,6 +305,7 @@ const TitleTextWrapper = styled.div`
 const TItleCharacter = styled.p`
   font-family: "Messapia-Bold";
   font-size: 12px;
+  color: ${(props) => props.other};
 `;
 
 const ColorChangeButton = styled.button`
@@ -222,14 +315,15 @@ const ColorChangeButton = styled.button`
   font-family: "Messapia-Bold";
   background-color: transparent;
   border-radius: 50px;
-  border: 1px solid black;
+  border: ${(props) => `1px solid ${props.other}`};
+  color: ${(props) => props.other};
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
 
   &:hover {
-    background-color: black;
-    color: white;
+    background-color: ${(props) => props.other};
+    color: ${(props) => props.background};
   }
 `;
 
@@ -256,6 +350,7 @@ const ParagraphWrapper = styled.p`
 const ParaLine = styled.span`
   display: flex;
   align-items: center;
+  color: ${(props) => props.other};
 `;
 
 const WordSet = styled.span`
@@ -325,6 +420,7 @@ const ContactWrapper = styled.div`
   display: flex;
   align-items: center;
   font-size: 12px;
+  color: ${(props) => props.other};
 `;
 
 const ContactText = styled.span`
@@ -343,8 +439,9 @@ const LanguageChangeButton = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 50px;
-  border: 1px solid black;
+  border: ${(props) => `1px solid ${props.other}`};
   background-color: transparent;
+  color: ${(props) => props.other};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,8 +449,8 @@ const LanguageChangeButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: black;
-    color: white;
+    background-color: ${(props) => props.other};
+    color: ${(props) => props.background};
   }
 `;
 
@@ -375,7 +472,7 @@ const CustomQuickLink = styled.a`
   font-size: 11px;
   line-height: 23px;
   transition: all 0.6s ease;
-  color: black;
+  color: ${(props) => props.other};
 
   &:hover {
     letter-spacing: 2px;
