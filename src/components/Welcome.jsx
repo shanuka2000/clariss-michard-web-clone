@@ -17,6 +17,7 @@ function Welcome({ onClick }) {
   return (
     <Container fade={fadeout.toString()}>
       <WelcomeImage
+        loading="lazy"
         fade={fadeout.toString()}
         src={"https://clarissemichard.com/welcomeAnim.cb031a15.gif"}
       />
