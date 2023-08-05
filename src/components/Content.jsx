@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useEffect, useState } from "react";
+import CustomIcon from "./CustomIcon";
 
 function Content() {
   const colors = [
@@ -55,10 +56,11 @@ function Content() {
   return (
     <Container background={backgroundColor} other={otherColor}>
       <NavSection>
-        <RotatingImage
+        {/* <RotatingImage
           style={{ stroke: "red" }}
           src={"../src/assets/Mediamodifier-Design.svg"}
-        />
+        /> */}
+        <CustomIcon color={otherColor} />
         <TitleTextWrapper>
           <TItleCharacter background={backgroundColor} other={otherColor}>
             H
@@ -124,9 +126,12 @@ function Content() {
           <ArrowForward run="false" />
           <ContactText>Contact</ContactText>
         </ContactWrapper>
-        <LanguageChangeButton background={backgroundColor} other={otherColor}>
-          <LanguageChangeButtonText>{lang}</LanguageChangeButtonText>
-        </LanguageChangeButton>
+        <LanguageWrapper>
+          <LanguageChangeButton background={backgroundColor} other={otherColor}>
+            <LanguageChangeButtonText>{lang}</LanguageChangeButtonText>
+          </LanguageChangeButton>
+        </LanguageWrapper>
+
         <QuickLinks>
           <CustomQuickLink
             background={backgroundColor}
@@ -172,14 +177,6 @@ function Content() {
 export default Content;
 
 // animations
-const rotateLogo = keyframes`
-  from {
-    transform: rotate(0deg);
-  } 
-  to {
-    transform: rotate(360deg);
-  }
-`;
 
 const bounceSide = keyframes`
   16.65% {
@@ -282,6 +279,7 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  transition: all 200ms ease;
 
   background-color: ${(props) => props.background};
 `;
@@ -419,6 +417,7 @@ const FooterSection = styled.div`
 const ContactWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 130px;
   font-size: 12px;
   color: ${(props) => props.other};
 `;
@@ -432,6 +431,14 @@ const ContactText = styled.span`
   &:hover {
     letter-spacing: 5px;
   }
+`;
+
+const LanguageWrapper = styled.div`
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LanguageChangeButton = styled.button`
